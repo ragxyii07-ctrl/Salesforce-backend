@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const dotenv = require('dotenv');
@@ -24,16 +23,8 @@ app.get('/', (req, res) => {
   res.json({ message: 'Cloud Sales Tracking System API Running' });
 });
 
-// Connect to MongoDB
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/cloud-sales';
-console.log('Connecting to MongoDB:', MONGO_URI);
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log('MongoDB Connected');
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch(err => {
-    console.error('MongoDB connection error:', err.message);
-    process.exit(1);
-  });
+// Start Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
